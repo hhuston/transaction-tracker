@@ -30,6 +30,11 @@
                 name="date"
                 type="date"
             />
+        <input
+            name="splits"
+            type="hidden"
+            value={splits}
+        />
         <input type="submit" />
     </form>
 </div>

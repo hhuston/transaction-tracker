@@ -1,4 +1,5 @@
 import * as db from '$lib/server/database';
+import type { Split } from '../ambient';
 
 export const actions = {
     create: async ({ cookies, request }) => {
@@ -7,11 +8,13 @@ export const actions = {
         let total_cost : number = Number(data.get('totalcost'));
         let category : string = String(data.get('category'));
         let date : string = String(data.get('date'));
+        let splits = data.get('splits');
 
         console.log('name:', name);
         console.log('cost:', total_cost);
         console.log('category:', category);
         console.log('date:', date);
+        console.log('splits:', splits);
 
         
         if (!name || !total_cost || !category || !date) {
