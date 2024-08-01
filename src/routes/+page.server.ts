@@ -25,7 +25,7 @@ export const actions = {
             };
         }
         
-        let is_income = category === "incomej";
+        let is_income = category === "income";
         console.log("Is Income?:", is_income)
 
         // db.createTransaction(name, total_cost, is_income, date);
