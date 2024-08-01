@@ -33,13 +33,11 @@
         <input type="submit" />
     </form>
 </div>
-<button on:click={ () => splits = [...splits, {name: "", items: []}] }>Add split</button>
-<button on:click={ () => { splits.pop(); splits=splits; } }>Remove split</button>
-{#each splits as split}
+<button on:click={ () => splits = [...splits, {name: "", items: []}] }>Add person</button>
+{#each splits as split, i}
     <input type="text" placeholder="Name" bind:value={split.name}>
     <button on:click={ () => split.items = [...split.items, {itemName: "", itemCost: 0}] }>Add item</button>
-    <button on:click={ () => { split.items.pop(); split.items=split.items; } }>Remove item</button>
-    {#each split.items as item}
+    {#each split.items as item, n}
         <label for="itemName">Item Name:</label>
         <input 
             name="itemName"
@@ -53,8 +51,9 @@
             step=".01"
             bind:value={item.itemCost}
         />
-        <input type="submit" />
         <p>Name: {item.itemName}</p>
         <p>Cost: {item.itemCost}</p>
+        <button on:click={ () => { split.items.splice(n, 1); split.items=split.items; } }>Remove item</button>
     {/each}
+    <button on:click={ () => { splits.splice(i, 1); splits=splits; } }>Remove person</button>
 {/each}
