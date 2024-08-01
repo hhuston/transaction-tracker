@@ -1,64 +1,59 @@
-<script>
+<script lang="ts">
+	import type { Split } from "../ambient";
 
-	import { enhance } from "$app/forms";
-
-	export let form;
-
-    console.log(form);
+    let total_cost : number;
+    let splits : Split[] = [];
 </script>
-
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
 
 <div>
     <form method="POST" 
-          action="?/create"
-          use:enhance={({ formElement, formData, action }) =>{
-            // console.log(formElement)
-            // console.log(formData)
-            // console.log(action)
-            return async ({ result, update }) => {
-                // console.log(result)
-            }
-          }}>
-        <label>
-            name:
+          action="?/create">
+        <label for="name">Name:</label>
             <input
                 name="name"
                 type="text"
-                value={form?.name ?? ''}
             />
-        </label>
-        <label>
-            total cost:
+        <label for="totalcost">Total Cost:</label>
             <input
-                name="total_cost"
+                name="totalcost"
                 type="number"
                 step=".01"
-                value={form?.total_cost ?? ''}
+                bind:value={total_cost}
             />
-        </label>
-        <label>
-            Income:
-            <input
-                name="category"
-                type="radio"
-            />
-        </label>
-        <label>
-            Expense:
-            <input
-                name="category"
-                type="radio"
-            />
-        </label>
-        <label>
-            Date:
+        <label for="category">Category:</label>
+            <select name="category" value="">
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+            </select>
+        <label for="date">Date:</label>
             <input
                 name="date"
                 type="date"
             />
-        </label>
         <input type="submit" />
     </form>
 </div>
+<button on:click={ () => splits = [...splits, {name: "", items: []}] }>Add person</button>
+{#each splits as split, i}
+    <input type="text" placeholder="Name" bind:value={split.name}>
+    <button on:click={ () => split.items = [...split.items, {itemName: "", itemCost: 0}] }>Add item</button>
+    {#each split.items as item, n}
+        <label for="itemName">Item Name:</label>
+        <input 
+            name="itemName"
+            type="text"
+            bind:value={item.itemName}
+        />
+        <label for="itemCost">Item Cost:</label>
+        <input 
+            name="itemCost"
+            type="number"
+            step=".01"
+            bind:value={item.itemCost}
+        />
+        <p>Name: {item.itemName}</p>
+        <p>Cost: {item.itemCost}</p>
+        <button on:click={ () => { split.items.splice(n, 1); split.items=split.items; } }>Remove item</button>
+    {/each}
+    <button on:click={ () => { splits.splice(i, 1); splits=splits; } }>Remove person</button>
+{/each}
