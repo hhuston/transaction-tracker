@@ -33,12 +33,28 @@
         <input type="submit" />
     </form>
 </div>
-<button on:click={() => splits = [...splits, {name: "Matt", items: [{itemName: "Meal", itemCost: 50}]}]}>Add split</button>
-<button on:click={() => {splits.pop(); splits=splits}}>Remove split</button>
-{#each splits as split, i}
-    <p>{i}</p>
-    <p>{split.name}</p>
+<button on:click={ () => splits = [...splits, {name: "", items: []}] }>Add split</button>
+<button on:click={ () => { splits.pop(); splits=splits; } }>Remove split</button>
+{#each splits as split}
+    <input type="text" placeholder="Name" bind:value={split.name}>
+    <button on:click={ () => split.items = [...split.items, {itemName: "", itemCost: 0}] }>Add item</button>
+    <button on:click={ () => { split.items.pop(); split.items=split.items; } }>Remove item</button>
+    {#each split.items as item}
+        <label for="itemName">Item Name:</label>
+        <input 
+            name="itemName"
+            type="text"
+            bind:value={item.itemName}
+        />
+        <label for="itemCost">Item Cost:</label>
+        <input 
+            name="itemCost"
+            type="number"
+            step=".01"
+            bind:value={item.itemCost}
+        />
+        <input type="submit" />
+        <p>Name: {item.itemName}</p>
+        <p>Cost: {item.itemCost}</p>
+    {/each}
 {/each}
-{#if total_cost}
-    <p>{total_cost}</p>
-{/if}
