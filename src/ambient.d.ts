@@ -3,7 +3,7 @@ export interface Item {
     itemCost: number
 };
 
-export interface IndividualTransaction {
+export interface Split {
     name: string,
     items: item[],
 };
