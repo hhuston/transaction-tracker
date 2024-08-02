@@ -1,5 +1,5 @@
 import * as db from '$lib/server/database';
-import type { Split } from '../ambient';
+import type { Split } from '../../ambient';
 
 export const actions = {
     create: async ({ cookies, request }) => {

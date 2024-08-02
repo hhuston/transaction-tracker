@@ -1,0 +1,12 @@
+<form>
+    <input
+        name="username"
+        type="text"
+        placeholder="Username"
+    />
+    <input
+        name="password"
+        type="text"
+        placeholder="Password"
+    />
+</form>

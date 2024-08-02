@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Split } from "../ambient";
+	import type { Split } from "../../ambient";
 
     let total_cost : number;
     let splits : Split[] = [];

@@ -1,0 +1,5 @@
+<nav>
+	<a href="/login">Login</a>
+</nav>
+
+<slot />
